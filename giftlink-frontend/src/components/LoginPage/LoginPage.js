@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
-// Step 1 - Task 1
 import { urlConfig } from '../../config';
-
-// Step 1 - Task 2
 import { useAppContext } from '../../context/AuthContext';
-
-// Step 1 - Task 3
 import { useNavigate } from 'react-router-dom';
 
 import './LoginPage.css';
@@ -14,16 +8,12 @@ import './LoginPage.css';
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    // Step 1 - Task 4
     const [incorrect, setIncorrect] = useState('');
 
-    // Step 1 - Task 5
     const navigate = useNavigate();
     const bearerToken = sessionStorage.getItem('bearer-token');
     const { setIsLoggedIn } = useAppContext();
 
-    // Step 1 - Task 6
     useEffect(() => {
         if (sessionStorage.getItem('auth-token')) {
             navigate('/app');
@@ -34,22 +24,16 @@ function LoginPage() {
         e.preventDefault();
 
         try {
-            // Step 1 - Task 7, 8, 9
             const res = await fetch(
                 `${urlConfig.backendUrl}/api/auth/login`,
                 {
-                    // Task 7: Set POST method
                     method: 'POST',
-
-                    // Task 8: Set headers
                     headers: {
                         'content-type': 'application/json',
                         'Authorization': bearerToken
                             ? `Bearer ${bearerToken}`
                             : '',
                     },
-
-                    // Task 9: Send user details
                     body: JSON.stringify({
                         email: email,
                         password: password,
@@ -57,35 +41,18 @@ function LoginPage() {
                 }
             );
 
-            // Step 2 - Task 1
             const json = await res.json();
 
             console.log('Json', json);
 
-            // Step 2 - Task 2
             if (json.authtoken) {
-                sessionStorage.setItem(
-                    'auth-token',
-                    json.authtoken
-                );
+                sessionStorage.setItem('auth-token', json.authtoken);
+                sessionStorage.setItem('name', json.userName);
+                sessionStorage.setItem('email', json.userEmail);
 
-                sessionStorage.setItem(
-                    'name',
-                    json.userName
-                );
-
-                sessionStorage.setItem(
-                    'email',
-                    json.userEmail
-                );
-
-                // Step 2 - Task 3
                 setIsLoggedIn(true);
-
-                // Step 2 - Task 4
                 navigate('/app');
             } else {
-                // Step 2 - Task 5
                 setEmail('');
                 setPassword('');
 
@@ -107,7 +74,6 @@ function LoginPage() {
             <div className="row justify-content-center">
                 <div className="col-md-6 col-lg-4">
                     <div className="login-card p-4 border rounded">
-
                         <h2 className="text-center mb-4 font-weight-bold">
                             Login
                         </h2>
@@ -153,14 +119,13 @@ function LoginPage() {
                                 }}
                             />
 
-                            {/* Step 2 - Task 6 */}
                             <span
                                 style={{
                                     color: 'red',
                                     height: '.5cm',
                                     display: 'block',
                                     fontStyle: 'italic',
-                                    fontSize: '12px'
+                                    fontSize: '12px',
                                 }}
                             >
                                 {incorrect}
@@ -183,7 +148,6 @@ function LoginPage() {
                                 Register Here
                             </a>
                         </p>
-
                     </div>
                 </div>
             </div>
