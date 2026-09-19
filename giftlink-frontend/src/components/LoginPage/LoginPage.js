@@ -34,14 +34,14 @@ function LoginPage() {
         e.preventDefault();
 
         try {
-            // Step 1 - Task 7, 8, 9
+            // API call
             const res = await fetch(
                 `${urlConfig.backendUrl}/api/auth/login`,
                 {
-                    // Task 7: Set POST method
+                    // Step 1 - Task 7
                     method: 'POST',
 
-                    // Task 8: Set headers
+                    // Step 1 - Task 8
                     headers: {
                         'content-type': 'application/json',
                         'Authorization': bearerToken
@@ -49,7 +49,7 @@ function LoginPage() {
                             : '',
                     },
 
-                    // Task 9: Send user details
+                    // Step 1 - Task 9
                     body: JSON.stringify({
                         email: email,
                         password: password,
@@ -62,8 +62,8 @@ function LoginPage() {
 
             console.log('Json', json);
 
-            // Step 2 - Task 2
             if (json.authtoken) {
+                // Step 2 - Task 2
                 sessionStorage.setItem(
                     'auth-token',
                     json.authtoken
