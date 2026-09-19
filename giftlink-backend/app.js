@@ -33,22 +33,24 @@ app.use(pinoHttp({ logger: pinoLogger }));
 // Route files
 
 // Gift API Task 1:
-// Import giftRoutes and store it in a constant called giftroutes
 const giftroutes = require('./routes/giftRoutes');
 
 // Search API Task 1:
-// Import searchRoutes and store it in a constant called searchRoutes
 const searchRoutes = require('./routes/searchRoutes');
+
+// Auth API Task 1:
+const authRoutes = require('./routes/authRoutes');
 
 // Use Routes
 
 // Gift API Task 2:
-// Add giftRoutes to the server under /api/gifts
 app.use('/api/gifts', giftroutes);
 
 // Search API Task 2:
-// Add searchRoutes to the server under /api/search
 app.use('/api/search', searchRoutes);
+
+// Auth API Task 2:
+app.use('/api/auth', authRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
