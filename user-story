@@ -1,0 +1,15 @@
+# User Story Template
+
+## User Story
+
+**As a** [type of user],
+
+**I want** [some goal or action],
+
+**So that** [some reason or benefit].
+
+## Acceptance Criteria
+
+- [ ] The user can complete the requested action.
+- [ ] The system provides the expected result.
+- [ ] The feature works correctly when valid information is provided.
